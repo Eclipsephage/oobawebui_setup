@@ -1,6 +1,10 @@
 #!/bin/bash
 
 #Runpod setup directions here: https://www.youtube.com/watch?v=TP2yID7Ubr4
+#You MUST set container image to runpod/oobabooga:1.1.0
+#Set Disk size to at least 50GB
+#Always use a fresh pod.
+#git clone this file by default to /text-generation-webui
 
 # Stop on error
 set -e
@@ -42,7 +46,8 @@ pip install -r requirements.txt
 # Go back to text-generation-webui
 cd /text-generation-webui
 
-echo "Setting up server..."
+echo "\e[32mStarting server...\e[0m"
+sleep 3
 
 # Run server and get its PID
 if [ "$SILLY_TAVERN" = "y" ]
@@ -52,16 +57,17 @@ else
     python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api &
 fi
 SERVER_PID=$!
+echo -e "\e[32mComplete!! Server PID is $SERVER_PID\e[0m"
 
-# Print message and wait for 5 seconds
-echo "Setup complete.  Restarting server..."
-sleep 5
+## Print message and wait for 5 seconds
+#echo "Setup complete.  Restarting server..."
+#sleep 5
 
-# Kill the server process and restart it
-kill $SERVER_PID
-if [ "$SILLY_TAVERN" = "y" ]
-then
-    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api
-else
-    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api
-fi
+## Kill the server process and restart it
+#kill $SERVER_PID
+#if [ "$SILLY_TAVERN" = "y" ]
+#then
+#    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices #--model llama --extension whisper_stt api
+#else
+ #   python server.py --share --public-api --api --trust-remote-code --chat --auto-devices #--model llama --extension whisper_stt elevenlabs_tts api
+#fi
