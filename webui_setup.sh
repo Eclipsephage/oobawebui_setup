@@ -10,7 +10,7 @@ cd /text-generation-webui
 
 # Ask the user if they are using "Silly Tavern"
 read -p "Are you using a separate interface with TTS, such as silly tavern? (y/n) " SILLY_TAVERN
-read -p "Stop installation on errors? (y/n) " ERROR_STOP
+read -p "Stop installation on errors? Choose 'n' if simply re-installing. (y/n) " ERROR_STOP
 
 # Stop on error?
 if [[ "$ERROR_STOP" != "n" ]]
