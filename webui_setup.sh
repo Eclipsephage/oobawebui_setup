@@ -76,3 +76,4 @@ then
 else
 	echo -e "\e[32mrunning python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api\e[0m"
     python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api
+fi
