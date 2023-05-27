@@ -6,13 +6,17 @@
 #Always use a fresh pod.
 #git clone this file by default to /text-generation-webui
 
-# Stop on error
-set -e
-
 cd /text-generation-webui
 
 # Ask the user if they are using "Silly Tavern"
-read -p "Are you using 'Silly Tavern'? (y/n) " SILLY_TAVERN
+read -p "Are you using a separate interface with TTS, such as silly tavern? (y/n) " SILLY_TAVERN
+read -p "Stop installation on errors? (y/n) " ERROR_STOP
+
+# Stop on error?
+if [[ "$ERROR_STOP" != "n" ]]
+then
+	set -e
+fi
 
 # Update git repository
 git pull
@@ -46,29 +50,20 @@ pip install -r requirements.txt
 # Go back to text-generation-webui
 cd /text-generation-webui
 
-echo -e "\e[32mStarting server...\e[0m"
+echo -e "\e[32mStarting server... press Ctrl-C and re-run server.py if fails\e[0m"
 
 # Run server and get its PID
 if [ "$SILLY_TAVERN" = "y" ]
 then
-    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api &
+	echo -e "\033[33mrunning python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api033[0m"
+	python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api
+
 else
-    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api &
+	echo -e "\033[33mrunning python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api033[0m"
+    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api
 fi
 
-sleep 10
+sleep 15
 SERVER_PID=$!
 echo -e "\e[32mComplete!! Server PID is $SERVER_PID\e[0m"
 
-## Print message and wait for 5 seconds
-#echo "Setup complete.  Restarting server..."
-#sleep 5
-
-## Kill the server process and restart it
-#kill $SERVER_PID
-#if [ "$SILLY_TAVERN" = "y" ]
-#then
-#    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices #--model llama --extension whisper_stt api
-#else
- #   python server.py --share --public-api --api --trust-remote-code --chat --auto-devices #--model llama --extension whisper_stt elevenlabs_tts api
-#fi
