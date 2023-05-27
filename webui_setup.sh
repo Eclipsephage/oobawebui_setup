@@ -5,6 +5,8 @@
 # Stop on error
 set -e
 
+cd /text-generation-webui
+
 # Ask the user if they are using "Silly Tavern"
 read -p "Are you using 'Silly Tavern'? (y/n) " SILLY_TAVERN
 
@@ -28,13 +30,13 @@ apt-get update
 apt-get install -y ffmpeg
 
 # Install Python dependencies for each extension
-cd /extensions/elevenlabs_tts
+cd extensions/elevenlabs_tts
 pip install -r requirements.txt
 
-cd /extensions/whisper_stt
+cd /text-generation-webui/extensions/whisper_stt
 pip install -r requirements.txt
 
-cd /extensions/api
+cd /text-generation-webui/extensions/api
 pip install -r requirements.txt
 
 # Go back to text-generation-webui
