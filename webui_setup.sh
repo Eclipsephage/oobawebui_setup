@@ -50,11 +50,11 @@ pip install -r requirements.txt
 # Go back to text-generation-webui
 cd /text-generation-webui
 
-echo -e "\e[32mInitializing server...\e[0m"
+echo -e "\e[32mBypassing model load and Initializing server...\e[0m"
 
 # Run server and get its PID
 #Note: setting the model keeps ooba from autoloading pyg
-if [ "$SILLY_TAVERN" = "y"   
+if [ "$SILLY_TAVERN" = "y" ]   
 then
 	python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --model_type llama --extension whisper_stt api &
 
@@ -64,7 +64,7 @@ fi
 
 sleep 12
 SERVER_PID=$!
-echo -e "\e[32mServer PID is $SERVER_PID\e[0m"
+echo -e "\e[32mServer_init PID is $SERVER_PID\e[0m"
 echo -e "\e[32mStarting server... press Ctrl-C and re-run server.py if fails\e[0m"
 kill $SERVER_PID
 sleep 5
