@@ -50,9 +50,24 @@ pip install -r requirements.txt
 # Go back to text-generation-webui
 cd /text-generation-webui
 
-echo -e "\e[32mStarting server... press Ctrl-C and re-run server.py if fails\e[0m"
+echo -e "\e[32mInitializing server...\e[0m"
 
 # Run server and get its PID
+if [ "$SILLY_TAVERN" = "y" ]
+then
+	python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api &
+
+else
+    python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api &
+fi
+
+sleep 15
+SERVER_PID=$!
+echo -e "\e[32mServer PID is $SERVER_PID\e[0m"
+echo -e "\e[32mStarting server... press Ctrl-C and re-run server.py if fails\e[0m"
+kill $SERVER_PID
+sleep 5
+
 if [ "$SILLY_TAVERN" = "y" ]
 then
 	echo -e "\e[32mrunning python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt api\e[0m"
@@ -61,6 +76,3 @@ then
 else
 	echo -e "\e[32mrunning python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api\e[0m"
     python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api
-fi
-
-
