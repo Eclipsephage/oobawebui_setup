@@ -46,8 +46,7 @@ pip install -r requirements.txt
 # Go back to text-generation-webui
 cd /text-generation-webui
 
-echo "\e[32mStarting server...\e[0m"
-sleep 3
+echo -e "\e[32mStarting server...\e[0m"
 
 # Run server and get its PID
 if [ "$SILLY_TAVERN" = "y" ]
@@ -56,6 +55,8 @@ then
 else
     python server.py --share --public-api --api --trust-remote-code --chat --auto-devices --model llama --extension whisper_stt elevenlabs_tts api &
 fi
+
+sleep 10
 SERVER_PID=$!
 echo -e "\e[32mComplete!! Server PID is $SERVER_PID\e[0m"
 
