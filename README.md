@@ -1,5 +1,5 @@
 # oobawebui_setup
-Simple bash script to quickly setup an oobabooga webui server on a Runpod instance.
+Simple bash script to quickly setup an oobabooga webui server on a Runpod instance and instantiate api access.
 
 Exmaple Runpod setup directions here: https://www.youtube.com/watch?v=TP2yID7Ubr4. \
 You MUST set container image to runpod/oobabooga:1.1.0\
