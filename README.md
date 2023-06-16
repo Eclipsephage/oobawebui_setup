@@ -2,7 +2,7 @@
 Simple bash script to quickly setup an oobabooga webui server on a Runpod instance and instantiate api access for a service such as Silly Tavern.
 
 Example Runpod setup directions here: https://www.youtube.com/watch?v=TP2yID7Ubr4. \
-You MUST set container image to runpod/oobabooga:1.1.0\
+You MUST set container image to runpod/oobabooga:1.1.0\ or better
 Set Disk size to at least 50GB.\
 Use a fresh pod if able, or minimally reset it if there are errors present.
 
